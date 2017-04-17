@@ -1,25 +1,40 @@
 import request from '../utils/request';
 import { PAGE_SIZE } from '../constants';
 
-export function fetch({ page }) {
-  return request(`/api/users?_page=${page}&_limit=${PAGE_SIZE}`);
+export function fetch({ offIndex }) {
+  console.log('page的json.stringify');
+  console.log(JSON.stringify(offIndex));
+  return request(`/api/user/userList?_offIndex=${offIndex}&_pageSize=${PAGE_SIZE}`);
 }
 
 export function remove(id) {
-  return request(`/api/users/${id}`, {
-    method: 'DELETE',
+  return request('/api/user/remove', {
+    method: 'POST',
+    body: {
+      id: { id },
+    },
   });
 }
 
 export function patch(id, values) {
-  return request(`/api/users/${id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(values),
+  return request('/api/user/', {
+    method: 'POST',
+    body: {
+      id: { id },
+      values: JSON.stringify(values),
+    },
   });
+  // return request('/api/user/userList', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+  //   },
+  //   body: JSON.stringify(page),
+  // });
 }
 
 export function create(values) {
-  return request('/api/users', {
+  return request('/api/user', {
     method: 'POST',
     body: JSON.stringify(values),
   });

@@ -14,10 +14,11 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
       payload: id,
     });
   }
-  function pageChangeHandler(page) {
+  function pageChangeHandler(offIndex) {
+    console.log('下标是%s', offIndex);
     dispatch(routerRedux.push({
       pathname: '/users',
-      query: { page },
+      query: { offIndex },
     }));
   }
   function editHandler(id, values) {
@@ -30,22 +31,34 @@ function Users({ dispatch, list: dataSource, loading, total, page: current }) {
     dispatch({
       type: 'users/create',
       payload: values,
-    })
+    });
   }
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a href="">{text}</a>,
+      title: 'certName',
+      dataIndex: 'certName',
+      key: 'certName',
+      render: certName => <a href="">{certName}</a>,
     }, {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: '类型',
+      dataIndex: 'category',
+      key: 'category',
+      render: category => <a href="">{category}</a>,
     }, {
-      title: 'WebSite',
-      dataIndex: 'website',
-      key: 'website',
+      title: 'certConfirm',
+      dataIndex: 'certConfirm',
+      key: 'certConfirm',
+      render: certConfirm => <a href="">{certConfirm}</a>,
+    }, {
+      title: 'certNo',
+      dataIndex: 'certNo',
+      key: 'certNo',
+      render: certNo => <a href="">{certNo}</a>,
+    }, {
+      title: 'isCredited',
+      dataIndex: 'isCredited',
+      key: 'isCredited',
+      render: isCredited => <a href="">{isCredited}</a>,
     }, {
       title: 'Operation',
       key: 'operation',

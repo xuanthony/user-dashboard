@@ -13,14 +13,18 @@ export default {
     },
   },
   effects: {
-    *fetch({ payload: { page = 1 } }, { call, put }) {
-      const { data, headers } = yield call(usersService.fetch, { page });
+    *fetch({ payload: { offIndex = 1 } }, { call, put }) {
+      const data = yield call(usersService.fetch, { offIndex });
+      console.log('yield call 执行后的数据：%o', data);
+      console.log(data.data);
+      console.log(data.total);
       yield put({
         type: 'save',
         payload: {
-          data,
-          total: parseInt(headers['x-total-count'], 10),
-          page: parseInt(page, 10),
+          data: data.data.data,
+          total: data.data.total,
+          // total: parseInt(headers['x-total-count'], 10),
+          page: parseInt(offIndex, 10),
         },
       });
     },

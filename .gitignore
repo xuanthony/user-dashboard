@@ -9,3 +9,10 @@
 # misc
 .DS_Store
 npm-debug.log*
+*.iml
+.idea/
+.project
+.settings
+npm-debug.log
+dist
+coverage/
